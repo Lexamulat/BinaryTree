@@ -1,0 +1,4 @@
+﻿  Source.cpp
+d:\2 семестр\саод 6 03 12\saod 6\saod6\source.cpp(451): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  saod6.vcxproj -> D:\2 семестр\саод 6 03 12\SAOD 6\saod6\Debug\saod6.exe
+  saod6.vcxproj -> D:\2 семестр\саод 6 03 12\SAOD 6\saod6\Debug\saod6.pdb (Partial PDB)
