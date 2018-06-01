@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-struct node // структура для представления узлов дерева
+struct node 
 {
 	int key;
 	unsigned int height=0;
@@ -45,34 +45,10 @@ void StraightPrint(node *head)
 }
 
 
-//void SimmHeight(node *head){  //ща буим height заполнять (в обратном порядке)
-//
-//	if (head == NULL)   // Базовый случай
-//	{
-//		return;
-//	}
-//	SimmHeight(head->left);  
-//	SimmHeight(head->right);
-//	// тут делать ченить над
-//	if ((head->left == nullptr) && (head->right == nullptr)) {
-//		head->height = 0;
-//	}
-//	else { 
-//		//(hl>hr ? hl : hr) + 1;
-//		//(head->left == nullptr ? head->height = (head->right->height)+1 : head->height = (head->left->height)+1);
-//		if (head->left == nullptr)  head->height = (head->right->height) + 1;
-//		else if (head->right == nullptr) head->height = (head->left->height) + 1;
-//		if (head->height == -1) {
-//			(head->left->height > head->right->height ? head->height = (head->left->height) + 1 : head->height = (head->right->height) + 1);
-//		}
-//	}
-//	cout << endl;
-//	cout << head->key;
-//	cout << "(" << head->height << ")"<< endl;
-//}
+
 
 unsigned int height(node*&head) {
-	//if (!head) head->height = 0;
+	
 	return head ? head->height : 0;
 }
 
@@ -84,9 +60,7 @@ void fixheight(node *&head) {
 }
 
 void LeftRotate(node* &head) {
-	//cout << "LEFTrot around-----" << endl;
-//	cout << head->key << endl;
-//	cout << "--------------" << endl;
+	"--------------" << endl;
 	node* p = head->right;
 	if (p == nullptr)head->right = nullptr;
     head->right = p->left;
@@ -97,13 +71,10 @@ void LeftRotate(node* &head) {
 
 	head = p;
 
-	//return p;
 }
 
 void RightRotate(node* &head) {
-	//cout << "RIGHrot around-----" << endl;
-	//cout << head->key << endl;
-	//cout << "--------------" << endl;
+	
 	node* q = head->left;
 	if (q == nullptr)head->left = nullptr;
 	head->left = q->right;
@@ -113,24 +84,20 @@ void RightRotate(node* &head) {
 
 	head = q;
 
-	//return q;
-	//надобы высоты поменять
+	
 }
 
 void Balance(node *&head) {
 	int bfactor = 0;
-	if (head == NULL)   // Базовый случай
+	if (head == NULL)   
 	{
 		return;
 	}
 	Balance(head->left);
 	Balance(head->right);
 	fixheight(head);
-	//SimmHeight(head);
-
-	//bfactor = head->right->height - head->left->height;
+	
 	bfactor = height(head->right) - height(head->left);
-	//cout << head->key << endl;
 
 	if (bfactor == 2) {
 		if (height(head->right->left) <= height(head->right->right)) {
@@ -174,16 +141,12 @@ void Create(node*& head,node*& temp, node*& current) {
 		if (temp->key< current->key) {
 			if (current->left == nullptr) {
 				current->left = temp;
-				//cout << "-----add-" << endl;
-				//print(head,up);
-				//cout << "---------------" << endl;
+				--------------" << endl;
 				Balance(head);
-				//cout << "----add  i balance-" << endl;
-				//print(head, up);
-				//cout << "---------------" << endl;
+			
 				current = head;
 
-			//	 SimmHeight(head);
+			
 				return;
 			}
 			else {
@@ -195,16 +158,12 @@ void Create(node*& head,node*& temp, node*& current) {
 			if (current->right == nullptr) {
 				current->right = temp;
 				
-			//	cout << "-----add-" << endl;
-				//print(head, up);
-			//	cout << "---------------" << endl;
+			
 				Balance(head);
-			//	cout << "-----add i balance-" << endl;
-			//	print(head, up);
-			//	cout << "---------------" << endl;
+			
 				current = head;
 
-			//	SimmHeight(head);
+				
 				return;
 			}
 			else {
@@ -218,7 +177,7 @@ void Create(node*& head,node*& temp, node*& current) {
 
 
 void Generate(node*& head) {
-	//а-лев b-пра
+	//Г -Г«ГҐГў b-ГЇГ°Г 
 	//rand() % (b - a + 1) + a;
 
 	node* temp = new node;
@@ -293,7 +252,7 @@ node* FindMin(node*& p)
 {
 	return p->left ? FindMin(p->left) : p;
 }
-node* removemin(node*& p) // удаление узла с минимальным ключом из дерева p
+node* removemin(node*& p) 
 {
 	if (p->left == 0)return p->right;
 	p->left = removemin(p->left);
@@ -301,47 +260,8 @@ node* removemin(node*& p) // удаление узла с минимальным ключом из дерева p
 	return p;
 }
 
-//void DeleteKey(node*& hip) {
-//	bool b = 0;
-//	int num;
-//	node * Current = hip;
-//	if (hip == nullptr) {
-//		cout << "Empty" << endl;
-//		return;
-//	}
-//
-//	cout << "enter deleted key" << endl;
-//	cin >> num;
-//	Rec(hip, num,b);
-//	
-//	if (b == 0) {
-//		return;
-//	}
-//	else {
-//		node* left = hip->left;
-//		node* right = hip->right;
-//		//node*nw = head;
-//		
-//		if (right == nullptr && left==nullptr) {
-//
-//			hip=nullptr;
-//			
-//			return;
-//
-//		}
-//		else {
-//		node* min= FindMin(right);
-//		min->right = removemin(right);
-//		min->left = left;
-//		Balance(min);
-//		Current = min;
-//		}
-//	
-//	}
-//	Balance(Current);
-//}
 
-node* remove(node* p, int k) // удаление ключа k из дерева p
+node* remove(node* p, int k) 
 {
 	if (!p) return 0;
 	if (k < p->key)
@@ -360,52 +280,11 @@ node* remove(node* p, int k) // удаление ключа k из дерева p
 		// Balance(min);
 		 return min;
 	}
-	//Balance(p);
+	
 	return p;
 }
 
 
-//node* DeleteKey(node* head, int num) {
-//	//node* nw;
-//	if (head == nullptr) {
-//		cout << "Empty" << endl;
-//		exit(0);
-//	}
-//	if (num < head->key) {
-//		if (head->left == nullptr) {
-//			cout << "disappeard" << endl;
-//			exit(0);
-//		}
-//		else {
-//
-//			DeleteKey(head->left, num);
-//		}
-//	}
-//	else if (num > head->key) {
-//		if (head->right == nullptr) {
-//			cout << "disappeard" << endl;
-//			exit(0);
-//		}
-//		else DeleteKey(head->right, num);
-//	}
-//	if (num == head->key) {
-//		node* left = head->left;
-//		node* right = head->right;
-//		
-//		if (right == nullptr) {
-//			node* nw = head;
-//			delete nw;
-//			return right;
-//		}
-//		node* min = FindMin(right);
-//		min->right = removemin(right);
-//		min->left = left;
-//		Balance(min);
-//		return min;
-//	}
-//	// Balance(head);
-//	 //return head;
-//}
 
 
 void SearchKey(node*& head) {
@@ -455,33 +334,7 @@ int main() {
 	for (int i = 0; i < 10; i++) {
 		Generate(head);
 	}
-	//current = head;
-
-	//print(head,up);
-	//cout << "-----------------------------";
-	//StraightPrint(head);
-	//SimmHeight(head);
-	//cout << endl;
-//	Search(head);
-
-	//AddKey(head);
-	//SearchKey(head);
-	//int num;
-	//cout << "---" << endl;
-	//cin >> num;
-	//u=remove(head,num);
-	//Balance(u);
-	//DeleteKey(head);
-	//Balance(head);
-	//head = u;
-	//print(head, up);
 	
-	//cout << "eeeeee changes" << endl;
-
-	//Balance(head);
-
-	//print(head, up);
-	//cout << "-----------------------------";
 
 	while (1) {
 		cout << "Menu" << endl;
